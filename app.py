@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import fitz
 import logging
-from sentence_transformers import SentenceTransformer, util
 import google.generativeai as genai
 from io import BytesIO
 import numpy as np
