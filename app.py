@@ -14,6 +14,9 @@ import numpy as np
 import json
 from genai import Genai
 from langchain.memory import ConversationBufferWindowMemory
+import logging
+from langchain.embeddings import GeminiEmbeddings
+from langchain import Gemini
 
 
 logging.basicConfig(level=logging.DEBUG)
@@ -53,9 +56,15 @@ def extract_text_from_pdf(file_stream):
         return ""
 
 # Function to get embeddings of text using SentenceTransformer model
+
+# Make sure you have your API keys configured
+# e.g., os.environ['GEMINI_API_KEY'] = 'your_gemini_api_key'
+
 def get_embeddings(text):
+    gemini = Gemini(api_key=os.getenv("GEMINI_API_KEY"))
+    embedder = GeminiEmbeddings(gemini)
     try:
-        embeddings = model.encode(text, convert_to_tensor=True)
+        embeddings = embedder.embed(text)
         return embeddings
     except Exception as e:
         logging.error(f"Error getting embeddings: {e}")
