@@ -20,3 +20,5 @@ google-api-python-client
 requests
 PyMuPDF
 scikit-learn
+genai
+langchain-google-genai
